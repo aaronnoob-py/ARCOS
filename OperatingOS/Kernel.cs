@@ -21,9 +21,17 @@ namespace OperatingOS
         private string FatFilePath = @"0:\\Database.txt";
         private string CurrentUserPath = @"0:\\CurrentUser.txt";
         protected override void BeforeRun()
-        {
+        {   
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
             bool ValidChoice = false;
+            try
+            {
+                var database = File.Create(@"0:\Database.txt");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
             while (ValidChoice == false)
             {
@@ -152,6 +160,8 @@ namespace OperatingOS
                                 Console.WriteLine($"File {filePath} does not exist.");
                             }
                             break;
+
+                        default: return;
                     }
                 }
             }
@@ -160,11 +170,8 @@ namespace OperatingOS
 
 
         protected override void Run()
-        {
-            //Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+        { 
 
-            //string CurrentUser = "0:\\CurrentUser.txt";
-            //string username = File.ReadAllText(CurrentUser);
             string[] commands = {"1","2","3","4","5","6","7","8","9","10","help"};
 
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -175,8 +182,13 @@ namespace OperatingOS
             Console.WriteLine(" | |\\/| |  __| | . ` | |  | |");
             Console.WriteLine(" | |  | | |____| |\\  | |__| |");
             Console.WriteLine(" |_|  |_|______|_| \\_|\\____/ ");
-            //Console.WriteLine($"Welcome, {username}, to OOS!");
+            
+
             Console.WriteLine("\n");
+            Console.WriteLine("Welcome to ARC OS Main Menu!");
+            Console.WriteLine("\n");
+
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Enter '1' to access Clock.");
             Console.WriteLine("Enter '2' to access Calculator.");
             Console.WriteLine("Enter '3' to access system information.");
@@ -256,7 +268,9 @@ namespace OperatingOS
                         else
                         {
                             Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("Reboot canceled. Press any key to return to the menu.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.ReadKey();
                         }
                         break;
@@ -277,7 +291,9 @@ namespace OperatingOS
                         }
                         else
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("Shutdown canceled. Press any key to return to the menu.");
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.ReadKey();
                         }
                         break;

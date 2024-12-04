@@ -13,8 +13,8 @@ public class LoginProcess
 
     public void Login()
     {
-        Console.WriteLine("Log in to Operating OS!");
         Console.Clear();
+        Console.WriteLine("Log in to ARC OS!");
         Console.WriteLine("Are you an existing user? (Y/N): ");
         string existingUser = Console.ReadLine().ToLower();
 
@@ -30,8 +30,10 @@ public class LoginProcess
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Invalid option. Please choose Y or N.");
-            Thread.Sleep(100);
+            Console.ForegroundColor = ConsoleColor.White;
+            Thread.Sleep(1000);
             Console.Clear();
         }
     }

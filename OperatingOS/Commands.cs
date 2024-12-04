@@ -13,8 +13,12 @@ namespace OperatingOS
     internal class Commands
     {
         public void CommandLine() {
+            Console.Clear();
+            Thread.Sleep(5000);
             Console.WriteLine("ARC Operating System v. 1.0.0");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Type menu to return to Main Menu");
+            Console.ForegroundColor = ConsoleColor.White;
             string Command = Console.ReadLine().ToLower();
 
             string[] Commands = { "r Delete", "r Reboot", "r Logout", "r Shutdown", "r Initialize, menu" }; // Add custom commands here
@@ -32,15 +36,17 @@ namespace OperatingOS
                 case "r Logout":
                     LoginProcess Login = new();
                     Login.Login();
-                    break;
+                    return;
 
                 case "r Shutdown":
                     Sys.Power.Shutdown();
                     break;
 
                     default:
-                        Console.WriteLine("Invalid command."); // add custom commands here
-                        break;    
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Invalid command."); // add custom commands here
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;    
                  }
             }
         }

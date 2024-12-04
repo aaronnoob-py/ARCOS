@@ -14,6 +14,9 @@ public class SignUpProcess {
     public void SignUp()
     {
         Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("Create an account for ARC OS!");
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Are you an existing user? (Y/N): ");
         string existingUser = Console.ReadLine().ToLower();
 
@@ -31,7 +34,9 @@ public class SignUpProcess {
         }
         else
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Invalid option. Please choose Y or N.");
+            Console.ForegroundColor = ConsoleColor.White;
             Thread.Sleep(1000);
             Console.Clear();
             SignUp();
@@ -59,7 +64,9 @@ public class SignUpProcess {
 
             if (File.Exists(filePath) && File.ReadAllLines(filePath).Any(line => line.StartsWith(username + ":"))) // ibig sabihin may kopya na
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Username already exists. Please choose another.");
+                Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(10000);
                 SignUpUser();
             }
@@ -102,7 +109,9 @@ public class SignUpProcess {
             key = keyInfo.Key;
             if (key == ConsoleKey.Backspace && password.Length > 0)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("Please reenter your username and password.");
+                Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(2500);
                 SignUpUser();
 

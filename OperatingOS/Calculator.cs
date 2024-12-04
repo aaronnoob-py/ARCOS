@@ -12,7 +12,9 @@ namespace OperatingOS
             while (true)
             {
                 Console.Clear();
+                Console.WriteLine("===========");
                 Console.WriteLine("Calculator");
+                Console.WriteLine("===========");
                 Console.WriteLine("\nChoose an operation:");
                 Console.WriteLine("Enter + for Addition ");
                 Console.WriteLine("Enter - for Subtraction ");
@@ -63,7 +65,9 @@ namespace OperatingOS
                     case "/":
                         if (num2 == 0)
                         {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.WriteLine("\nError: Division by zero is not allowed.");
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         else
                         {
@@ -73,7 +77,9 @@ namespace OperatingOS
                         break;
 
                     default:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("\nInvalid choice. Please select a valid operation.");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                 }
                 // Press Enter to continue
