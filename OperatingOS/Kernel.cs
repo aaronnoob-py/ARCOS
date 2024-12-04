@@ -28,14 +28,28 @@ namespace OperatingOS
             while (ValidChoice == false)
             {
 
-                Console.Clear();
-                Console.WriteLine("=///////////////////////////=");
-                Console.WriteLine("Welcome to OOS!");
+                Console.Clear();                
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                Console.WriteLine("   █████████   ███████████     █████████        ███████     █████████ ");
+                Console.WriteLine("  ███░░░░░███ ░░███░░░░░███   ███░░░░░███     ███░░░░░███  ███░░░░░███");
+                Console.WriteLine(" ░███    ░███  ░███    ░███  ███     ░░░     ███     ░░███░███    ░░░ ");
+                Console.WriteLine(" ░███████████  ░██████████  ░███            ░███      ░███░░█████████ ");
+                Console.WriteLine(" ░███░░░░░███  ░███░░░░░███ ░███            ░███      ░███ ░░░░░░░░███");
+                Console.WriteLine(" ░███    ░███  ░███    ░███ ░░███     ███   ░░███     ███  ███    ░███");
+                Console.WriteLine(" █████   █████ █████   █████ ░░█████████     ░░░███████░  ░░█████████ ");
+                Console.WriteLine("░░░░░   ░░░░░ ░░░░░   ░░░░░   ░░░░░░░░░        ░░░░░░░     ░░░░░░░░░  ");
+
+  
                 Console.WriteLine("\n");
-                Console.WriteLine("Enter '1' to sign up");
-                Console.WriteLine("Enter '2' to log in");
-                Console.WriteLine("Enter '3' to reboot the system");
-                Console.WriteLine("Enter '4' to shut down");
+
+                Console.WriteLine("Welcome to ARC OS!");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("\n");
+                Console.WriteLine("Enter '1' to Create an Account");
+                Console.WriteLine("Enter '2' to Log In");
+                Console.WriteLine("Enter '3' to Reboot the System");
+                Console.WriteLine("Enter '4' to Shut Down");
                 Console.WriteLine("\n");
 
                 string ChoicePrompt1 = Console.ReadLine();
@@ -51,7 +65,7 @@ namespace OperatingOS
                     switch (ChoicePrompt1Converted)
                     {
                         case 1:
-                            SignUpProcess SignUp = new SignUpProcess();
+                            SignUpProcess SignUp = new();
                             SignUp.SignUp();
                             ValidChoice = true; // Exit the loop after a valid choice
                             Run();
@@ -61,7 +75,7 @@ namespace OperatingOS
 
                             ValidChoice = true;
                             bool isAuthenticated = false;
-                            LoginProcess Login = new LoginProcess();
+                            LoginProcess Login = new();
                             //Login.Login();
 
                             if (Login.AuthenticateUser())
@@ -153,8 +167,14 @@ namespace OperatingOS
             //string username = File.ReadAllText(CurrentUser);
             string[] commands = {"1","2","3","4","5","6","7","8","9","10","help"};
 
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Clear();
-            Console.WriteLine("=///////////////////////////=");
+            Console.WriteLine("  __  __ ______ _   _ _    _ ");
+            Console.WriteLine(" |  \\/  |  ____| \\ | | |  | |");
+            Console.WriteLine(" | \\  / | |__  |  \\| | |  | |");
+            Console.WriteLine(" | |\\/| |  __| | . ` | |  | |");
+            Console.WriteLine(" | |  | | |____| |\\  | |__| |");
+            Console.WriteLine(" |_|  |_|______|_| \\_|\\____/ ");
             //Console.WriteLine($"Welcome, {username}, to OOS!");
             Console.WriteLine("\n");
             Console.WriteLine("Enter '1' to access Clock.");
@@ -177,10 +197,13 @@ namespace OperatingOS
                 switch (ChoicePrompt2)
                 {
                     case "1":
-                        //clock
+                        Clock ClockTime = new();
+                        ClockTime.ClockTime();
                         break;
+
                     case "2":
-                        //calculator
+                        Calculator Calc = new();
+                        Calc.Calcu(); 
                         break;
                     case "3":
                         var totalfreespace = fs.GetTotalFreeSpace(@"0:\");
@@ -189,15 +212,33 @@ namespace OperatingOS
 
                         Console.Clear();
                         Console.WriteLine("Version of Operating OS: 1.0.0");
-                        Console.Write("\nTotal Free Space: " + totalfreespace);
+                        Console.Write($"\nTotal Free Space: {totalfreespace}  ");
                         Console.WriteLine("\nAvailable Free Space: " + available_space);
                         Console.WriteLine("File System Type: " + fs_type);
                         Console.WriteLine("Press any key to return to the menu.");
                         Console.ReadKey();
                         Run();
                         break;
+
                     case "4":
+                        Console.Clear();
+                        Console.WriteLine("Are you sure you want to log out? Y/N");
+                        string LOConfirmation = Console.ReadLine();
+                        string LOConfirmationLower = LOConfirmation.ToLower();
+                        if (LOConfirmationLower == "y")
+                        {
+                            Console.Clear();
+                            LoginProcess LoggedOut = new();
+                            LoggedOut.Login();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Logout canceled. Press any key to return to the menu.");
+                            Console.ReadKey();
+                        }
                         break;
+
                     case "5":                        
                         Console.Clear();
                         Console.WriteLine("Are you sure you want to reboot? Y/N");
@@ -230,7 +271,7 @@ namespace OperatingOS
                         {
                             Console.Clear();
                             Console.WriteLine("Shutting Down.. ");
-                            Thread.Sleep(10000);
+                            Thread.Sleep(1000);
                             Sys.Power.Shutdown();
                             //Environment.Exit(0);
                         }
@@ -242,8 +283,9 @@ namespace OperatingOS
                         break;
 
                     case "help":
-                        Console.WriteLine("");
-
+                        Console.WriteLine("Activated permissions.");
+                        Commands Secret = new();
+                        Secret.CommandLine();
                         break;
 
 

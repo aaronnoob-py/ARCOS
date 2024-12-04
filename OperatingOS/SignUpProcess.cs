@@ -102,7 +102,9 @@ public class SignUpProcess {
             key = keyInfo.Key;
             if (key == ConsoleKey.Backspace && password.Length > 0)
             {
-                Console.Write("\b \b");
+                Console.Write("Please reenter your username and password.");
+                Thread.Sleep(2500);
+                SignUpUser();
 
                 password = password.Substring(0, password.Length - 1);
             }
