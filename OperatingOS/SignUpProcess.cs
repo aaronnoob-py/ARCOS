@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class SignUpProcess {
 
     public bool IsLoggedIn = false;
-    private string filePath = "0:\\Database.txt";
+    private string filePath = @"0:\\Database.txt";
     public void SignUp()
     {
         Console.Clear();
@@ -48,6 +48,14 @@ public class SignUpProcess {
         {
             Console.Write("Enter username: ");
             username = Console.ReadLine();
+            if(username == null || ReadPassword == null)
+            {
+                Console.WriteLine("Invalid entry. Please choose a different username or password.");
+                Thread.Sleep(1000);
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+                SignUpUser();
+            }
 
             if (File.Exists(filePath) && File.ReadAllLines(filePath).Any(line => line.StartsWith(username + ":"))) // ibig sabihin may kopya na
             {
@@ -64,7 +72,7 @@ public class SignUpProcess {
                     // Write the username and password to the file
                     using (StreamWriter writer = new StreamWriter(filePath, true)) // 'true' to append
                     {
-                        writer.WriteLine($"{username}:{password}");
+                        writer.WriteLine($"\n{username}:{password}");
                         writer.Close();
                     }
 

@@ -72,7 +72,7 @@ public class LoginSectionTest2
             }
 
             // After password input, update dictionary with the new password
-            string username = usernames.Keys.Last(); // Get the last added user, assuming it's the one just created
+            string username = usernames.Keys.Last(); 
             usernames[username] = (username, password); // Update the dictionary with the actual password
 
             Console.Clear();
@@ -101,5 +101,19 @@ public class LoginSectionTest2
             Console.WriteLine("User not found.");
         }
     }
+
+    private void SaveUsername(string username)
+    {
+        string filePath = @"0:\username.txt";
+        try
+        {
+            File.WriteAllText(filePath, username);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving username: {ex.Message}");
+        }
+    }
+}
 }
  
