@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 public class SignUpProcess {
 
     public bool IsLoggedIn = false;
-    private string filePath = @"0:\\Database.txt";
+    //private string filePath = @"0:\\Database.txt";
     public void SignUp()
     {
         Console.Clear();
@@ -61,7 +61,7 @@ public class SignUpProcess {
                 Console.ReadKey();
                 SignUpUser();
             }
-
+/*
             if (File.Exists(filePath) && File.ReadAllLines(filePath).Any(line => line.StartsWith(username + ":"))) // ibig sabihin may kopya na
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -69,34 +69,34 @@ public class SignUpProcess {
                 Console.ForegroundColor = ConsoleColor.White;
                 Thread.Sleep(10000);
                 SignUpUser();
-            }
-            else
-            {
+            }*/
+            //else
+            //{
                 Console.Write("Enter password: ");
                 string password = ReadPassword();
-                try
+                /*try
                 {
                     // Write the username and password to the file
                     using (StreamWriter writer = new StreamWriter(filePath, true)) // 'true' to append
                     {
                         writer.WriteLine($"\n{username}:{password}");
                         writer.Close();
-                    }
+                   */ }
 
                     Console.WriteLine("\nAccount created successfully! You can now log in.");
                     Console.WriteLine("Press any key to continue...");
                     Console.ReadKey();
-                    break; // Exit the loop
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to save data: {ex.Message}");
-                    Console.WriteLine("Press any key to retry...");
-                    Console.ReadKey();
-                }
-            }
+                   // break; // Exit the loop
+               // }
+              //  catch (Exception ex)
+             //   {
+              //      Console.WriteLine($"Failed to save data: {ex.Message}");
+              //      Console.WriteLine("Press any key to retry...");
+              //      Console.ReadKey();
+               // }
+          //  }
         }
-    }
+//    }
 
     private string ReadPassword()
 

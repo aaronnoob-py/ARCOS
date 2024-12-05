@@ -7,6 +7,10 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Cosmos.HAL.BlockDevice.Registers;
+using System.Runtime.Remoting;
+using Cosmos.System.FileSystem.VFS;
+using Cosmos.Core.Memory;
+using Cosmos.Core;
 
 namespace OperatingOS
 {
@@ -18,20 +22,13 @@ namespace OperatingOS
         //File.Create(dir + "\\" + file);
 
         Sys.FileSystem.CosmosVFS fs = new Cosmos.System.FileSystem.CosmosVFS();
-        private string FatFilePath = @"0:\\Database.txt";
-        private string CurrentUserPath = @"0:\\CurrentUser.txt";
+        //private string FatFilePath = @"0:\\Database.txt";
+        //private string CurrentUserPath = @"0:\\CurrentUser.txt";
         protected override void BeforeRun()
-        {   
-            Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
+        {
             bool ValidChoice = false;
-            try
-            {
-                var database = File.Create(@"0:\Database.txt");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            Thread.Sleep(10000);
+
 
             while (ValidChoice == false)
             {
@@ -134,6 +131,7 @@ namespace OperatingOS
 
                             if (ConfirmationLower == "y")
                             {
+                                Console.Clear();
                                 Console.WriteLine("Shutting Down.. ");
                                 Thread.Sleep(1000);
                                 Sys.Power.Shutdown();
@@ -148,7 +146,7 @@ namespace OperatingOS
                             ValidChoice = true;
                             break;
                         case 5:
-                            string filePath = @"0:\\Database.txt";
+                            string filePath = ("");
                             if (File.Exists(filePath))
                             {
                                 // Delete the file
@@ -191,7 +189,7 @@ namespace OperatingOS
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Enter '1' to access Clock.");
             Console.WriteLine("Enter '2' to access Calculator.");
-            Console.WriteLine("Enter '3' to access system information.");
+            Console.WriteLine("Enter '3' to access ARC OS kernel version.");
             Console.WriteLine("Enter '4' to log out.");
             Console.WriteLine("Enter '5' to reboot the system.");
             Console.WriteLine("Enter '6' to shut down.");
@@ -218,15 +216,16 @@ namespace OperatingOS
                         Calc.Calcu(); 
                         break;
                     case "3":
-                        var totalfreespace = fs.GetTotalFreeSpace(@"0:\");
-                        var available_space = fs.GetAvailableFreeSpace(@"0:\");
-                        var fs_type = fs.GetFileSystemType(@"0:\");
+                        //var totalfreespace = fs.GetTotalFreeSpace(@"0:\");
+                        //var available_space = fs.GetAvailableFreeSpace(@"0:\");
+                        //var fs_type = fs.GetFileSystemType(@"0:\");
 
                         Console.Clear();
-                        Console.WriteLine("Version of Operating OS: 1.0.0");
-                        Console.Write($"\nTotal Free Space: {totalfreespace}  ");
-                        Console.WriteLine("\nAvailable Free Space: " + available_space);
-                        Console.WriteLine("File System Type: " + fs_type);
+                        Console.WriteLine("Version of ARC OS: 1.0.0");
+                        Console.WriteLine("\n");
+                        //Console.Write($"\nTotal Free Space: {totalfreespace}  ");
+                        //Console.WriteLine("\nAvailable Free Space: " + available_space);
+                        //Console.WriteLine("File System Type: " + fs_type);
                         Console.WriteLine("Press any key to return to the menu.");
                         Console.ReadKey();
                         Run();
@@ -298,7 +297,7 @@ namespace OperatingOS
                         }
                         break;
 
-                    case "help":
+                    case "commands":
                         Console.WriteLine("Activated permissions.");
                         Commands Secret = new();
                         Secret.CommandLine();

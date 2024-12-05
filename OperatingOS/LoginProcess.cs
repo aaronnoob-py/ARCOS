@@ -8,7 +8,7 @@ using System.Threading;
 public class LoginProcess
 {
     public bool IsLoggedIn = false;
-    private string FatFilePath = @"0:\\Database.txt";
+//    private string FatFilePath = @"0:\\Database.txt";
     Dictionary<string, string> userCredentials = new Dictionary<string, string>();
 
     public void Login()
@@ -39,7 +39,7 @@ public class LoginProcess
     }
 
 
-    public Dictionary<string, string> LoadUserCredentials()
+/*    public Dictionary<string, string> LoadUserCredentials()
     {
         Dictionary<string, string> userCredentials = new Dictionary<string, string>();
 
@@ -88,7 +88,7 @@ public class LoginProcess
             return null;
         }
     }
-
+*/
     public bool AuthenticateUser()
     {
         Console.Clear();
@@ -97,12 +97,19 @@ public class LoginProcess
         Thread.Sleep(100);
         Console.WriteLine("Enter password: ");
         string password2 = ReadPassword();
+        Thread.Sleep(1000);
+        Console.Clear();
+        Console.WriteLine("Loading..");
+        Thread.Sleep(1000);
+        return true; // I ADDED THIS LATER
+        
 
-        string[] lines = File.ReadAllLines(FatFilePath);
+
+        //string[] lines = File.ReadAllLines(FatFilePath);
 
         bool isAuthenticated = false; // Flag to check authentication status
 
-        foreach (string line in lines)
+/*        foreach (string line in lines)
         {
             // Split the line into username and password
             string[] parts = line.Split(':');
@@ -129,9 +136,9 @@ public class LoginProcess
             Thread.Sleep(1000);
             Login(); // Retry login if authentication fails
             return false;
-        }
+*/}
 
-    public string SaveUsername(string username)
+/*    public string SaveUsername(string username)
     {
         string filePath = "0:\\CurrentUser.txt";
         try
@@ -144,6 +151,9 @@ public class LoginProcess
         }
         return username;
     }
+
+    */
+
     private string ReadPassword()
     {
         string password = "";
