@@ -1,9 +1,13 @@
-﻿using System;
+﻿using OperatingOS;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
+using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
+
+
 
 public class LoginProcess
 {
@@ -21,8 +25,7 @@ public class LoginProcess
         if (existingUser == "n")
         {
             Console.Clear(); // STRAIGHT TO SIGNUP
-            SignUpProcess SignUp = new SignUpProcess();
-            SignUp.SignUp();
+            SignUp();
         }
         else if (existingUser == "y")
         {
@@ -35,124 +38,73 @@ public class LoginProcess
             Console.ForegroundColor = ConsoleColor.White;
             Thread.Sleep(1000);
             Console.Clear();
+            Login();
         }
     }
 
-
-/*    public Dictionary<string, string> LoadUserCredentials()
+    public void SignUp()
     {
-        Dictionary<string, string> userCredentials = new Dictionary<string, string>();
+        Console.Clear();
+        Console.WriteLine("Sign up for ARC OS!");
 
-        try
+        Console.Write("Enter a username: ");
+        string username = Console.ReadLine();
+        if (userCredentials.ContainsKey(username))
         {
-            // Ensure the file exists
-            if (!File.Exists(FatFilePath))
-            {
-                Console.WriteLine($"File not found at {FatFilePath}");
-                return userCredentials;
-            }
-
-            // Read all lines from the file
-            string[] lines = File.ReadAllLines(FatFilePath);
-
-            foreach (string line in lines)
-            {
-                // Split the line into username and password
-                string[] parts = line.Split(':');
-                string username = parts[0].Trim();
-                string password = parts[1].Trim();
-                userCredentials[username] = password;
-            }
-
-            Console.WriteLine("User credentials loaded successfully.");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error reading from FAT file: {ex.Message}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Username already exists. Please try a different username.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Thread.Sleep(1000);
+            SignUp();
         }
 
-        return userCredentials;
-    }
+    Console.Write("Enter a password: ");
+        string password = ReadPassword();
 
-    public string FindPasswordForUser(string username)
+    // Add the new user to the in-memory database
+        userCredentials[username] = password;
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Account created successfully! You can now log in.");
+        Console.ForegroundColor = ConsoleColor.White;
+        Thread.Sleep(1000);
+        Login(); // Redirect to login after successful sign-up
+}
+
+public bool AuthenticateUser()
     {
-        var credentials = LoadUserCredentials();
+        Console.Clear();
+        Console.WriteLine("Log in to ARC OS!");
 
-        if (credentials.ContainsKey(username))
+        Console.Write("Enter username: ");
+        string username = Console.ReadLine();
+
+        Console.Write("Enter password: ");
+        string password = ReadPassword();
+
+        Console.Clear();
+        Console.WriteLine("Loading...");
+        Thread.Sleep(1000);
+
+        // Check if the username exists and matches the password
+        if (userCredentials.ContainsKey(username) && userCredentials[username] == password)
         {
-            return credentials[username]; // Return the password
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Welcome, {username}!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Thread.Sleep(1000);
+            return true;
         }
         else
         {
-            Console.WriteLine("User not found.");
-            return null;
-        }
-    }
-*/
-    public bool AuthenticateUser()
-    {
-        Console.Clear();
-        Console.WriteLine("Enter username: "); // input username
-        string username2 = Console.ReadLine();
-        Thread.Sleep(100);
-        Console.WriteLine("Enter password: ");
-        string password2 = ReadPassword();
-        Thread.Sleep(1000);
-        Console.Clear();
-        Console.WriteLine("Loading..");
-        Thread.Sleep(1000);
-        return true; // I ADDED THIS LATER
-        
-
-
-        //string[] lines = File.ReadAllLines(FatFilePath);
-
-        bool isAuthenticated = false; // Flag to check authentication status
-
-/*        foreach (string line in lines)
-        {
-            // Split the line into username and password
-            string[] parts = line.Split(':');
-            if (parts.Length < 2)
-            {
-                continue; // Skip invalid lines
-            }
-
-            string username = parts[0].Trim();
-            string password = parts[1].Trim();
-
-            // Check if the entered username and password match
-            if (username2 == username && password2 == password)
-            {
-                Console.WriteLine($"{username} {password}");
-                Console.WriteLine($"{username2} {password2}");
-                Console.WriteLine($"Welcome, {username}.");
-                Thread.Sleep(1000);
-                isAuthenticated = true;
-                return true; // Exit loop after successful authentication
-            }
-        }
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Incorrect credentials. Please try again.");
+            Console.ForegroundColor = ConsoleColor.White;
             Thread.Sleep(1000);
             Login(); // Retry login if authentication fails
             return false;
-*/}
-
-/*    public string SaveUsername(string username)
-    {
-        string filePath = "0:\\CurrentUser.txt";
-        try
-        {
-            File.WriteAllText(filePath, username);
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error saving username: {ex.Message}");
-        }
-        return username;
     }
-
-    */
 
     private string ReadPassword()
     {

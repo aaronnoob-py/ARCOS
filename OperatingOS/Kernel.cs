@@ -70,8 +70,8 @@ namespace OperatingOS
                     switch (ChoicePrompt1Converted)
                     {
                         case 1:
-                            SignUpProcess SignUp = new();
-                            SignUp.SignUp();
+                            LoginProcess Login = new();
+                            Login.SignUp();
                             ValidChoice = true; // Exit the loop after a valid choice
                             Run();
                             break;
@@ -80,10 +80,10 @@ namespace OperatingOS
 
                             ValidChoice = true;
                             bool isAuthenticated = false;
-                            LoginProcess Login = new();
+                            LoginProcess Login2 = new();
                             //Login.Login();
 
-                            if (Login.AuthenticateUser())
+                            if (Login2.AuthenticateUser())
                             {
                                 Console.Clear();
                                 Console.WriteLine("Login successful! Initializing system...");
@@ -95,7 +95,7 @@ namespace OperatingOS
                                 Console.Clear();
                                 Console.WriteLine("Login failed. Returning to the main menu...");
                                 Thread.Sleep(1000);
-                                BeforeRun();
+                                ValidChoice = false;
                             }
                             break;
 
