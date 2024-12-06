@@ -116,6 +116,7 @@ public bool AuthenticateUser()
             key = keyInfo.Key;
             if (key == ConsoleKey.Backspace && password.Length > 0)
             {
+                Console.Clear();
                 Console.Write("Please reenter your username and password.");
                 Thread.Sleep(2500);
                 Login();
