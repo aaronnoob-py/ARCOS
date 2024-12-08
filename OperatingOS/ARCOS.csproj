@@ -18,7 +18,7 @@
         <PxeInterface>192.168.0.8</PxeInterface>
         <VMWareEdition>Workstation</VMWareEdition>
         <DebugEnabled>False</DebugEnabled>
-        <Launch>ISO</Launch>
+        <Launch>VMware</Launch>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     </PropertyGroup>
 
